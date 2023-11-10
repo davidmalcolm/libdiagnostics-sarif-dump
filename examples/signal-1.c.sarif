@@ -1,0 +1,362 @@
+{
+    "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+    "runs": [
+        {
+            "results": [
+                {
+                    "level": "warning",
+                    "ruleId": "-Wanalyzer-unsafe-call-within-signal-handler",
+                    "locations": [
+                        {
+                            "logicalLocations": [
+                                {
+                                    "decoratedName": "custom_logger",
+                                    "kind": "function",
+                                    "name": "custom_logger",
+                                    "fullyQualifiedName": "custom_logger"
+                                }
+                            ],
+                            "physicalLocation": {
+                                "contextRegion": {
+                                    "startLine": 13,
+                                    "snippet": {
+                                        "text": "  fprintf(stderr, \"LOG: %s\", msg);"
+                                    }
+                                },
+                                "artifactLocation": {
+                                    "uri": "../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c",
+                                    "uriBaseId": "PWD"
+                                },
+                                "region": {
+                                    "startLine": 13,
+                                    "endColumn": 34,
+                                    "startColumn": 3
+                                }
+                            }
+                        }
+                    ],
+                    "message": {
+                        "text": "call to \u2018fprintf\u2019 from within signal handler"
+                    },
+                    "taxa": [
+                        {
+                            "id": "479",
+                            "toolComponent": {
+                                "name": "cwe"
+                            }
+                        }
+                    ],
+                    "codeFlows": [
+                        {
+                            "threadFlows": [
+                                {
+                                    "locations": [
+                                        {
+                                            "nestingLevel": 1,
+                                            "location": {
+                                                "logicalLocations": [
+                                                    {
+                                                        "decoratedName": "main",
+                                                        "kind": "function",
+                                                        "name": "main",
+                                                        "fullyQualifiedName": "main"
+                                                    }
+                                                ],
+                                                "message": {
+                                                    "text": "entry to \u2018main\u2019"
+                                                },
+                                                "physicalLocation": {
+                                                    "contextRegion": {
+                                                        "startLine": 21,
+                                                        "snippet": {
+                                                            "text": "int main(int argc, const char *argv)\n"
+                                                        }
+                                                    },
+                                                    "artifactLocation": {
+                                                        "uri": "../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c",
+                                                        "uriBaseId": "PWD"
+                                                    },
+                                                    "region": {
+                                                        "startLine": 21,
+                                                        "endColumn": 9,
+                                                        "startColumn": 5
+                                                    }
+                                                }
+                                            },
+                                            "kinds": [
+                                                "enter",
+                                                "function"
+                                            ]
+                                        },
+                                        {
+                                            "nestingLevel": 1,
+                                            "location": {
+                                                "logicalLocations": [
+                                                    {
+                                                        "decoratedName": "main",
+                                                        "kind": "function",
+                                                        "name": "main",
+                                                        "fullyQualifiedName": "main"
+                                                    }
+                                                ],
+                                                "message": {
+                                                    "text": "registering \u2018handler\u2019 as signal handler"
+                                                },
+                                                "physicalLocation": {
+                                                    "contextRegion": {
+                                                        "startLine": 25,
+                                                        "snippet": {
+                                                            "text": "  signal(SIGINT, handler);\n"
+                                                        }
+                                                    },
+                                                    "artifactLocation": {
+                                                        "uri": "../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c",
+                                                        "uriBaseId": "PWD"
+                                                    },
+                                                    "region": {
+                                                        "startLine": 25,
+                                                        "endColumn": 26,
+                                                        "startColumn": 3
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "nestingLevel": 0,
+                                            "location": {
+                                                "message": {
+                                                    "text": "later on, when the signal is delivered to the process"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "nestingLevel": 1,
+                                            "location": {
+                                                "logicalLocations": [
+                                                    {
+                                                        "decoratedName": "handler",
+                                                        "kind": "function",
+                                                        "name": "handler",
+                                                        "fullyQualifiedName": "handler"
+                                                    }
+                                                ],
+                                                "message": {
+                                                    "text": "entry to \u2018handler\u2019"
+                                                },
+                                                "physicalLocation": {
+                                                    "contextRegion": {
+                                                        "startLine": 16,
+                                                        "snippet": {
+                                                            "text": "static void handler(int signum)\n"
+                                                        }
+                                                    },
+                                                    "artifactLocation": {
+                                                        "uri": "../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c",
+                                                        "uriBaseId": "PWD"
+                                                    },
+                                                    "region": {
+                                                        "startLine": 16,
+                                                        "endColumn": 20,
+                                                        "startColumn": 13
+                                                    }
+                                                }
+                                            },
+                                            "kinds": [
+                                                "enter",
+                                                "function"
+                                            ]
+                                        },
+                                        {
+                                            "nestingLevel": 1,
+                                            "location": {
+                                                "logicalLocations": [
+                                                    {
+                                                        "decoratedName": "handler",
+                                                        "kind": "function",
+                                                        "name": "handler",
+                                                        "fullyQualifiedName": "handler"
+                                                    }
+                                                ],
+                                                "message": {
+                                                    "text": "calling \u2018custom_logger\u2019 from \u2018handler\u2019"
+                                                },
+                                                "physicalLocation": {
+                                                    "contextRegion": {
+                                                        "startLine": 18,
+                                                        "snippet": {
+                                                            "text": "  custom_logger(\"got signal\");\n"
+                                                        }
+                                                    },
+                                                    "artifactLocation": {
+                                                        "uri": "../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c",
+                                                        "uriBaseId": "PWD"
+                                                    },
+                                                    "region": {
+                                                        "startLine": 18,
+                                                        "endColumn": 30,
+                                                        "startColumn": 3
+                                                    }
+                                                }
+                                            },
+                                            "kinds": [
+                                                "call",
+                                                "function"
+                                            ]
+                                        },
+                                        {
+                                            "nestingLevel": 2,
+                                            "location": {
+                                                "logicalLocations": [
+                                                    {
+                                                        "decoratedName": "custom_logger",
+                                                        "kind": "function",
+                                                        "name": "custom_logger",
+                                                        "fullyQualifiedName": "custom_logger"
+                                                    }
+                                                ],
+                                                "message": {
+                                                    "text": "entry to \u2018custom_logger\u2019"
+                                                },
+                                                "physicalLocation": {
+                                                    "contextRegion": {
+                                                        "startLine": 11,
+                                                        "snippet": {
+                                                            "text": "void custom_logger(const char *msg)\n"
+                                                        }
+                                                    },
+                                                    "artifactLocation": {
+                                                        "uri": "../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c",
+                                                        "uriBaseId": "PWD"
+                                                    },
+                                                    "region": {
+                                                        "startLine": 11,
+                                                        "endColumn": 19,
+                                                        "startColumn": 6
+                                                    }
+                                                }
+                                            },
+                                            "kinds": [
+                                                "enter",
+                                                "function"
+                                            ]
+                                        },
+                                        {
+                                            "nestingLevel": 2,
+                                            "location": {
+                                                "logicalLocations": [
+                                                    {
+                                                        "decoratedName": "custom_logger",
+                                                        "kind": "function",
+                                                        "name": "custom_logger",
+                                                        "fullyQualifiedName": "custom_logger"
+                                                    }
+                                                ],
+                                                "message": {
+                                                    "text": "call to \u2018fprintf\u2019 from within signal handler"
+                                                },
+                                                "physicalLocation": {
+                                                    "contextRegion": {
+                                                        "startLine": 13,
+                                                        "snippet": {
+                                                            "text": "  fprintf(stderr, \"LOG: %s\", msg);\n"
+                                                        }
+                                                    },
+                                                    "artifactLocation": {
+                                                        "uri": "../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c",
+                                                        "uriBaseId": "PWD"
+                                                    },
+                                                    "region": {
+                                                        "startLine": 13,
+                                                        "endColumn": 34,
+                                                        "startColumn": 3
+                                                    }
+                                                }
+                                            },
+                                            "kinds": [
+                                                "danger"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "artifacts": [
+                {
+                    "location": {
+                        "uri": "../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c",
+                        "uriBaseId": "PWD"
+                    },
+                    "sourceLanguage": "c",
+                    "contents": {
+                        "text": "/* Example of a bad call within a signal handler.\n   'handler' calls 'custom_logger' which calls 'fprintf', and 'fprintf' is\n   not allowed from a signal handler.  */\n\n\n#include <stdio.h>\n#include <signal.h>\n\nextern void body_of_program(void);\n\nvoid custom_logger(const char *msg)\n{\n  fprintf(stderr, \"LOG: %s\", msg);\n}\n\nstatic void handler(int signum)\n{\n  custom_logger(\"got signal\");\n}\n\nint main(int argc, const char *argv)\n{\n  custom_logger(\"started\");\n\n  signal(SIGINT, handler);\n\n  body_of_program();\n\n  custom_logger(\"stopped\");\n\n  return 0;\n}\n"
+                    }
+                }
+            ],
+            "tool": {
+                "driver": {
+                    "fullName": "some full name goes here",
+                    "name": "GNU C17",
+                    "rules": [
+                        {
+                            "id": "-Wanalyzer-unsafe-call-within-signal-handler",
+                            "helpUri": "https://gcc.gnu.org/onlinedocs/gcc/Static-Analyzer-Options.html#index-Wanalyzer-unsafe-call-within-signal-handler"
+                        }
+                    ],
+                    "informationUri": "https://gcc.gnu.org/gcc-13/",
+                    "version": "13.0.0 20220601"
+                }
+            },
+            "originalUriBaseIds": {
+                "PWD": {
+                    "uri": "file:///home/david/coding/gcc-newgit-serialization/build/gcc/"
+                }
+            },
+            "taxonomies": [
+                {
+                    "organization": "MITRE",
+                    "name": "CWE",
+                    "version": "4.7",
+                    "shortDescription": {
+                        "text": "The MITRE Common Weakness Enumeration"
+                    },
+                    "taxa": [
+                        {
+                            "id": "479",
+                            "helpUri": "https://cwe.mitre.org/data/definitions/479.html"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "version": "2.1.0"
+}
+
+/* { dg-begin-multiline-output "" }
+../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c: In function 'custom_logger':
+../../src/gcc/testsuite/gcc.dg/analyzer/signal-1.c:13:3: warning: call to ‘fprintf’ from within signal handler [-Wanalyzer-unsafe-call-within-signal-handler]
+  'main': events 1-2
+    |
+    |......
+    |
+  event 3
+    |
+    |sarif-replay:
+    | (3): later on, when the signal is delivered to the process
+    |
+    +--> 'handler': events 4-5
+           |
+           |
+           +--> 'custom_logger': events 6-7
+                  |
+                  |
+   { dg-end-multiline-output "" } */
+
+// TODO: fixup the src location
+// TODO: quote the source code
+// TODO: CWE
+// TODO: event messages
+// TODO: etc
